@@ -31,6 +31,7 @@ private:
 	int hash(T inval);
 	LinkedList<T>** table;
 	int SIZE;
+	int length;
 
 };
 #endif

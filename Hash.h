@@ -24,7 +24,7 @@ public:
 	virtual T* GetItem(T* inval);
 	virtual int GetLength();
 
-private:
+//private:
 	unsigned long key;
 	int hash(T inval);
 	int SIZE;

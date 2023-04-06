@@ -1,5 +1,7 @@
 #include "Hash.h"
 #include <typeinfo>
+#include <sstream>
+#include <type_traits>
 
 //Constructor – This should have an overload 
 // indicating the maximum
@@ -7,8 +9,10 @@
 template <typename T>
 Hash<T>::Hash(){
 	table = new T*[100];
+	for(auto x: table)
+		x = nullptr;
 	SIZE = 100;
-	string = "Hash";
+	length = 0;
 }
 
 template <typename T>
@@ -19,7 +23,7 @@ Hash<T>::Hash(int size) {
 
 template <typename T>
 Hash<T>::~Hash(){
-	delete table;
+	delete[] table;
 	table = nullptr;
 }
 
@@ -28,18 +32,33 @@ Hash<T>::~Hash(){
 template <typename T>
 void Hash<T>::AddItem(T* inval) {
 	int count = 0;
-	int base_index = hash(*inval);
-	while (table[base_index%SIZE] != nullptr) { 
+
+	unsigned int base_index = hash(*inval)%SIZE;
+	cout << base_index<< endl;
+	base_index = (base_index + 1) % SIZE;
+	cout << base_index << endl;
+
+	
+	cout << table[base_index]<<endl;
+	for (int i = 0; i < SIZE; i++) {
+		if (table[(base_index+i)%SIZE] == nullptr) {
+			base_index = (base_index + i) % SIZE;
+			break;
+		}
+	}
+	/*
+	while (table[base_index] != nullptr) { 
 		count++;
-		base_index++; //linear probing insertion
+		base_index = (base_index + 1) % SIZE; //linear probing insertion
 		if (count >= SIZE) {
 			throw "TableOverflowException";
 			//can not add items
 		}
 	}
-	
+	*/
 	
 	table[base_index] = inval;
+	cout << *table[base_index] << endl;
 	length++;
 
 }
@@ -99,12 +118,25 @@ int Hash<T>::GetLength() {
 template <typename T>
 int Hash<T>::hash(T inval) {
 	int computation;
-	long value;
-	//below doesnt work because stoi doesnt work for all values or big strings
-	if (typeid(inval)==typeid("hello")) {
-		value = stoi(inval);
+	string stringify = to_string(inval);
+	/*
+	std::ostringstream oss;
+	if constexpr (std::is_pointer<T>::value) {
+		oss << *inval;
 	}
-	computation = ((long)value * key) % SIZE;  //need to make sure it handles strings which it doesnt at the moment
+	else {
+		oss << inval;
+	}
+	std::string stringify = oss.str();
+	*/
+	long value=0;
+	//if (typeid(stringify) == typeid("Hello"))
+	//{
+		for (auto x : stringify) {
+			value += static_cast<int>(x);
+		}
+	//}
+	computation = value % SIZE;  //need to make sure it handles strings which it doesnt at the moment
 	return computation;
 }
 
@@ -141,3 +173,6 @@ bool Hash<T>::operator <= (const Hash& rhs) const {
 
 }
 */
+
+//template class Hash<int>;
+//template class Hash<std::string>;

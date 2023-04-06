@@ -12,7 +12,7 @@ ChainHash<T>::ChainHash() {
 
 	table = new LinkedList<T>* [100];
 	SIZE = 100;
-	string = "Hash";
+	length = 0;
 }
 
 template <typename T>
@@ -51,6 +51,7 @@ void ChainHash<T>::AddItem(T* inval) {
 template <typename T>
 T* ChainHash<T>::RemoveItem(T* inval) {
 	int base_index = hash(*inval);
+	/*
 	try {
 		Node<T>* temp = table[base_index % SIZE]->GetItem(inval, table[base_index % SIZE]->head);
 		length--;
@@ -60,6 +61,7 @@ T* ChainHash<T>::RemoveItem(T* inval) {
 	catch () {
 		"Item not here";
 	}
+	*/
 }
 
 template <typename T>

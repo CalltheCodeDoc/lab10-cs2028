@@ -41,6 +41,25 @@ NumberList.cpp
 
 
 
+
+/*
+template <typename T>
+T* LinkedList<T>::searchsku(int SKU, LinkedList<T>* lis) {
+	Node<InventoryItem>* tempo = lis->head;
+	int suk;
+	while (tempo != nullptr) {
+		suk = tempo->data->GetSKU();
+		if (suk == SKU) {
+			return tempo->data;
+		}
+		tempo = tempo->next;
+	}
+	return nullptr;
+
+}
+*/
+
+
 template <typename T>
 void LinkedList<T>::AddItem(T* inval){
 	//so far this is unordered

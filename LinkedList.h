@@ -21,6 +21,12 @@ class LinkedList/*Node*/ {
 public:
 	LinkedList();
 	~LinkedList();
+
+
+
+	//T* LinkedList<T>::searchsku(int SKU, LinkedList<T>* lis);
+
+
 	void AddItem(T* item);
 	Node<T>* GetItem(T* item, Node<T>* ptr);
 	bool IsInList(T* item);
