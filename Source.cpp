@@ -10,9 +10,9 @@ int main() {
 
 
 	//TODO:
-	//1)properly implement hash key to index conversion
-	//^^^^ this isn't complete
-	//^^^ needs to handle the versatilitly of different template datatypes, especially string
+	//1)
+	//^^
+	//^
 	//
 	//2)make sure GET,Remove,add work in all cases
 	//

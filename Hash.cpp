@@ -45,6 +45,10 @@ void Hash<T>::AddItem(T* inval) {
 			base_index = (base_index + i) % SIZE;
 			break;
 		}
+		if(i ==SIZE-1) {
+			throw "TableOverflowException";
+			//can not add items
+		}
 	}
 	/*
 	while (table[base_index] != nullptr) { 
