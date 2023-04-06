@@ -8,17 +8,20 @@
 //number of items the Hash table can store.The default value is 100
 template <typename T>
 Hash<T>::Hash(){
-	table = new T*[100];
+	int const MAX_SIZE = 100;
+	table = new T*[MAX_SIZE];
 	for(auto x: table)
 		x = nullptr;
-	SIZE = 100;
+	SIZE = MAX_SIZE;
 	length = 0;
 }
 
 template <typename T>
-Hash<T>::Hash(int size) {
+Hash<T>::Hash(int const size) {
 	SIZE = size;
 	table = new T*[SIZE];
+	for (int i = 0; i <size; i++)
+		table[i] = nullptr;
 }
 
 template <typename T>
@@ -31,15 +34,14 @@ Hash<T>::~Hash(){
 //AddItem – adds an item from the list.
 template <typename T>
 void Hash<T>::AddItem(T* inval) {
-	int count = 0;
+	
 
 	unsigned int base_index = hash(*inval)%SIZE;
 	cout << base_index<< endl;
-	base_index = (base_index + 1) % SIZE;
-	cout << base_index << endl;
-
+	//base_index = (base_index + 1) % SIZE;
+	//cout << base_index << endl;
 	
-	cout << table[base_index]<<endl;
+	//cout << table[base_index]<<endl;
 	for (int i = 0; i < SIZE; i++) {
 		if (table[(base_index+i)%SIZE] == nullptr) {
 			base_index = (base_index + i) % SIZE;
@@ -73,6 +75,7 @@ void Hash<T>::AddItem(T* inval) {
 template <typename T>
 T* Hash<T>::RemoveItem(T* inval) {
 
+	/*
 	int count = 0;
 	int base_index = hash(*inval);
 	while (table[base_index % SIZE] == nullptr || *table[base_index % SIZE] != *inval) {
@@ -85,6 +88,33 @@ T* Hash<T>::RemoveItem(T* inval) {
 
 	T* temp = table[base_index];
 	table[base_index] = nullptr;
+	length--;
+	return temp;
+	*/
+
+
+
+
+
+	unsigned int base_index = hash(*inval) % SIZE;
+	//cout << base_index << endl;
+	base_index = (base_index + 1) % SIZE;
+	//cout << base_index << endl;
+
+
+	cout << table[base_index] << endl;
+	for (int i = 0; i < SIZE; i++) {
+		if (table[(base_index + i) % SIZE] != nullptr&& *table[(base_index + i) % SIZE] == *inval) {
+			base_index = (base_index + i) % SIZE;
+		}
+		if (i == SIZE - 1) {
+			throw "ItemNotFoundException";
+			//can not add items
+		}
+	}
+	T* temp = table[base_index];
+	table[base_index] = nullptr;
+	cout << *table[base_index] << endl;
 	length--;
 	return temp;
 }

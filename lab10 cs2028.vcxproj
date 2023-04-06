@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClInclude Include="ChainHash.h" />
     <ClInclude Include="Hash.h" />
+    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="Node.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChainHash.cpp" />
     <ClCompile Include="Hash.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="Source.cpp" />

@@ -27,10 +27,12 @@ int main() {
 
 	Hash<int>* hash = new Hash<int>(100);
 	hash->AddItem(new int(15));
-	hash->AddItem(new int(20));
+	hash->AddItem(new int(51));
 	hash->AddItem(new int(150));
 	hash->AddItem(new int(615));
+	hash->RemoveItem(new int(15));
 
+	
 
 	return 0;
 }
