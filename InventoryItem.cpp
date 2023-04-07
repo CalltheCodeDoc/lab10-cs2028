@@ -26,6 +26,10 @@ double InventoryItem::GetPrice() { return Price; }
 int	InventoryItem::GetSKU() { return SKU; }
 bool InventoryItem::InStock() { return (QuantityOnHand>0); }
 bool InventoryItem::Available(int dat) { 
+	//This Function doesn't work
+	// 
+	// 
+	// 
 	// Get the current time point
 	//auto now = std::chrono::system_clock::now();
 

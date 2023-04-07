@@ -39,7 +39,7 @@ void Hash<T>::AddItem(T* inval) {
 
 	unsigned int base_index = hash(*inval)%SIZE;
 	
-	for (int i = 0; i < SIZE; i++) {
+	for (int i = 0; i < SIZE; i++) {//linear probing
 		numComparisons++;
 		if (table[(base_index+i)%SIZE] == nullptr) {
 			base_index = (base_index + i) % SIZE;
@@ -50,19 +50,10 @@ void Hash<T>::AddItem(T* inval) {
 			//can not add items
 		}
 	}
-	/*
-	while (table[base_index] != nullptr) { 
-		count++;
-		base_index = (base_index + 1) % SIZE; //linear probing insertion
-		if (count >= SIZE) {
-			throw "TableOverflowException";
-			//can not add items
-		}
-	}
-	*/
+
 	
 	table[base_index] = inval;
-	cout << *table[base_index] << endl;
+	//cout << *table[base_index] << endl;
 	length++;
 
 }
@@ -75,11 +66,9 @@ T* Hash<T>::RemoveItem(T* inval) {
 
 	unsigned int base_index = hash(*inval) % SIZE;
 	//cout << base_index << endl;
-	//base_index = (base_index + 1) % SIZE;
-	//cout << base_index << endl;
-
-
 	cout << table[base_index] << endl;
+
+	//linear probing
 	for (int i = 0; i < SIZE; i++) {
 		if ((table[(base_index + i) % SIZE] != nullptr)&&( *table[(base_index + i) % SIZE] == *inval)) {
 			base_index = (base_index + i) % SIZE;
@@ -131,6 +120,10 @@ int Hash<T>::GetLength() {
 //the passed in stringand modulus by the maximum size of the table.
 template <typename T>
 int Hash<T>::hash(T inval) {
+
+	//hash takes each digit, and sums its ascii numeric value returning that value as an index
+
+
 	int computation;
 	//string stringify = to_string(inval);
 	

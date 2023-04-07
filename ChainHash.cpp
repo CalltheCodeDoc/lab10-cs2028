@@ -68,8 +68,6 @@ T* ChainHash<T>::RemoveItem(T* inval) {
 template <typename T>
 T* ChainHash<T>::GetItem(T* inval) {
 	int base_index = hash(*inval);
-	//Need a transverse function that gets item without removing it
-	//table[base_index % SIZE]->IsInList(T * item);
 	Node<T>* temp = table[base_index % SIZE]->FindItem(inval, table[base_index % SIZE]->head);
 	this->numComparisons += table[base_index % SIZE]->numRecursions;
 	if (temp == nullptr)

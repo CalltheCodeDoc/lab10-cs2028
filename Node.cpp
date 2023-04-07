@@ -13,8 +13,6 @@ Node<T>::Node(T* inval, Node* hinter) {
 		prev = hinter;
 	}
 	next = nullptr;
-	//if(hinter!=nullptr)//if data doesnt exist, this points to root node
-	//prev = hinter;
 }
 //destructor
 template <typename T>
@@ -22,6 +20,3 @@ Node<T>::~Node() {
 
 }
 
-//Node* prev
-//Node* next
-//T data

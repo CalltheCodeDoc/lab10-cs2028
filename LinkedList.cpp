@@ -160,13 +160,13 @@ template <typename T>
 Node<T>* LinkedList<T>::FindItem(T* item, Node<T>* ptr) {
 	//recursion
 //not done according to function
-//GetItem – searches the list for the given item.If found, it removes it from
+//FindItem – searches the list for the given item.If found, it does not remove it
 ///	the listand returns it.If not found, it returns a null pointer.
 
 	numRecursions++;
 	if (ptr != nullptr && *ptr->data < *item) {
 		if (ptr->next != nullptr) {
-			return GetItem(item, ptr->next);
+			return FindItem(item, ptr->next);
 		}
 		else {
 
@@ -174,36 +174,7 @@ Node<T>* LinkedList<T>::FindItem(T* item, Node<T>* ptr) {
 		}
 	}
 	else if (ptr != nullptr && *ptr->data == *item) {
-		//****************************************
-		//RIGHT HERE ADD THE REMOVE FUNCTION
-		// It swaps pointers to cut out the item
-		//*****************************************
-		//PROBLEM
-		//WHAT IF ITEM THATS GOTTEN IS HEAD PTR OR TAIL and theres 1 or 2
-		//THIS NEXT FUNCTION ONLY WORKS ON SANDWICHED PTRS
-
-		//ok
-		//make a umbrella function that swaps
-		//have umbrella function contains conditions
-		// that call specific case functions
-		//that swap
-		//do for all types of these functions
-		//Node<T>* temp;
-		//if (ptr == head && ptr == tail) {
-		//	iterator == nullptr;
-		//	temp = PointerSwap3(ptr);
-		//}
-		//else if (ptr == head) { //using tenary operator, but standard bool type castedworks too
-		//	temp = PointerSwap2(ptr, ptr->next, 0);
-		//}
-		//else if (ptr == tail) {
-		//	temp = PointerSwap2(ptr->prev, ptr, 1);
-		//}
-		////if this is sandwiched pointer
-		//else {
-		//	temp = PointerSwap(ptr->prev, ptr->next);
-		//}
-		//return temp;
+		
 		return ptr;
 	}
 	else {

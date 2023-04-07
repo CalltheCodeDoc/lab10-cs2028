@@ -49,6 +49,12 @@ int main() {
 	//1)   Add getters AND SETTERS AND MAKE MAKE STUFF PRIVATE, RELY MORE ON INHERITANCE
 	//^^
 	//^
+	// 1.5)   SeeNext fixed.2 problems:  finditem actuallyed called getitem on repeat.  so it emptied list out unintentionally, causing nullptr errors
+	//					something throws off the number of values by 1, so simple add one extra item than will be removed.  no more problems
+	// 
+	// 
+	// 1.75)   MEMORY LEAKS,  gotta make deletes!!!!!!!!  DELETES TO AVoid THE LEAKS    almost rhymes
+	// 
 	//
 	//2)   HAVE TO DEAL WITH PROPER DELETION OF STUFF WHEN IT DOESNT CONFLICT WITH OTHER USES
 	//					thats NODEs, LINKEDLISTS, HASHES, CHAINHASHES, INVENTORYITEMS
@@ -91,19 +97,21 @@ int main() {
 
 	int const ARRAY_SIZE = 50;
 
-
+	//create different hashs and lists
+	//hashes for comparison, list to store objects to keep track of for later
 	ChainHash<InventoryItem>* LLhash = new ChainHash<InventoryItem>(100);
 	Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
 	LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
 	int numcomp[4][2] = { {0} };
-	for (int i = 0; i < 100; i++) {
+	//generates random values for SKU students and inserts them
+	for (int i = 0; i < 51; i++) {
 		InventoryItem* student = generateSKU();
 		list->AddItem(student);
 		hash->AddItem(student);
 		LLhash->AddItem(student);
 
 	}
-
+	//finds the students skus that were generated earlier
 	for (int i = 0; i < 50; i++) {
 		//Node<InventoryItem>* poppedstudent = list->GetItem(list->SeeNext(),list->head);
 		InventoryItem* poppedstudent = list->SeeNext();
@@ -114,7 +122,7 @@ int main() {
 	}
 	numcomp[0][0] = hash->numComparisons;
 	numcomp[0][1] = LLhash->numComparisons;
-
+	//prints out results
 	cout << "Num of Comparisons" << endl;
 	cout << "Linear Probing: " << hash->numComparisons << endl;
 	cout << "Chained Hashing: " << LLhash->numComparisons << endl;
@@ -124,11 +132,21 @@ int main() {
 
 
 
-	/*Task 2: Reuse the class from Lab 8, Task 2 (Class to store data).You will need to add the
-		overload of the string object conversion.This object conversion should return the SKU.
-		Complete this before moving on to task 3*/
 
-	bool manual_debug = true;
+
+
+	//**********************************************************************************************
+	//*********************************  TEST CODE  ***********************************************
+	//**********************************************************************************************
+	//CODE Below until end of main is just test code, ignore it.  though there are some functions
+	// at the very bottom of code
+	//**********************************************************************************************
+	//**********************************************************************************************
+
+
+
+	//flip to true to activate test code
+	bool manual_debug = false;
 
 	if (manual_debug) {
 		ChainHash<InventoryItem>* hash = new ChainHash<InventoryItem>(100);
@@ -158,8 +176,6 @@ int main() {
 		hash->AddItem(new int(51));
 		int* temporary= hash->RemoveItem(new int(15));
 		cout <<  "removing this: " << * temporary << endl;*/
-
-
 
 		/*Hash<int>* hash = new Hash<int>(100);
 		hash->AddItem(new int(15));
@@ -207,9 +223,12 @@ InventoryItem* generateSKU() {
 	sixth_arg = rand() % 1000;
 	description = first_name[rand() % 46] + last_name[rand() % 46];
 	fourth_arg = "Simulated generated undergrads";
-	cout << description << endl;
-	cout << SKU << endl;
-	//4579, "XboxOne gaming console", 600, "UOM whatever that is", 5, 20
+	if (false) {
+		//flip to true to activate test code
+		cout << description << endl;
+		cout << SKU << endl;
+		//4579, "XboxOne gaming console", 600, "UOM whatever that is", 5, 20
+	}
 	InventoryItem* item = new InventoryItem(SKU, description, third_arg, fourth_arg, fifth_arg, sixth_arg);
 	return item;
 }
