@@ -10,8 +10,8 @@ template <typename T>
 Hash<T>::Hash(){
 	int const MAX_SIZE = 100;
 	table = new T*[MAX_SIZE];
-	for(auto x: table)
-		x = nullptr;
+	for (int i = 0; i < MAX_SIZE; i++)
+		table[i] = nullptr;
 	SIZE = MAX_SIZE;
 	length = 0;
 }
@@ -98,23 +98,24 @@ T* Hash<T>::RemoveItem(T* inval) {
 
 	unsigned int base_index = hash(*inval) % SIZE;
 	//cout << base_index << endl;
-	base_index = (base_index + 1) % SIZE;
+	//base_index = (base_index + 1) % SIZE;
 	//cout << base_index << endl;
 
 
 	cout << table[base_index] << endl;
 	for (int i = 0; i < SIZE; i++) {
-		if (table[(base_index + i) % SIZE] != nullptr&& *table[(base_index + i) % SIZE] == *inval) {
+		if ((table[(base_index + i) % SIZE] != nullptr)&&( *table[(base_index + i) % SIZE] == *inval)) {
 			base_index = (base_index + i) % SIZE;
+			break;
 		}
 		if (i == SIZE - 1) {
-			throw "ItemNotFoundException";
+			return nullptr;
 			//can not add items
 		}
 	}
 	T* temp = table[base_index];
 	table[base_index] = nullptr;
-	cout << *table[base_index] << endl;
+	//cout << *table[base_index] << endl;
 	length--;
 	return temp;
 }
@@ -123,17 +124,18 @@ T* Hash<T>::RemoveItem(T* inval) {
 //to the item but doesn’t remove it from the list.
 template <typename T>
 T* Hash<T>::GetItem(T* inval) {
-	int count = 0;
-	int base_index = hash(*inval);
-	while (table[base_index % SIZE] == nullptr ||*table[base_index % SIZE] != *inval) {
-		count++;
-		base_index++; //linear probing insertion
-		if (count >= SIZE) {
-			throw "ItemNotFoundException";
-			//item not found
+	unsigned int base_index = hash(*inval) % SIZE;
+	cout << table[base_index] << endl;
+	for (int i = 0; i < SIZE; i++) {
+		if ((table[(base_index + i) % SIZE] != nullptr) && (*table[(base_index + i) % SIZE] == *inval)) {
+			base_index = (base_index + i) % SIZE;
+			break;
+		}
+		if (i == SIZE - 1) {
+			return nullptr;
+			//can not add items
 		}
 	}
-	
 	return table[base_index];
 }
 

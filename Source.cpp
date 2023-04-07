@@ -14,7 +14,7 @@ int main() {
 	//^^
 	//^
 	//
-	//2)make sure GET,Remove,add work in all cases
+	//2)
 	//
 	//
 	//3)make sure the array of linkedlists are correctly set up & accessing them works sufficiently
