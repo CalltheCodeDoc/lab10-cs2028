@@ -23,7 +23,7 @@ public:
 	virtual T* RemoveItem(T* inval);
 	virtual T* GetItem(T* inval);
 	virtual int GetLength();
-
+	//gotta fix the privacy issues,  a lot of functions dont work when private
 //private:
 	unsigned long key;
 	int hash(T inval);

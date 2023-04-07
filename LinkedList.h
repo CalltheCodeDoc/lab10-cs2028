@@ -26,6 +26,8 @@ public:
 
 	//T* LinkedList<T>::searchsku(int SKU, LinkedList<T>* lis);
 
+	//Node<T>* FindItem(T* item, Node<T>* ptr = head);
+	Node<T>* FindItem(T* item, Node<T>* ptr);
 
 	void AddItem(T* item);
 	Node<T>* GetItem(T* item, Node<T>* ptr);

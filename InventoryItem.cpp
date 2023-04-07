@@ -56,7 +56,13 @@ bool InventoryItem::operator ==(InventoryItem& const other) {
 	else
 		return false;
 }
+/*
 ostream& operator <<(ostream& out, const InventoryItem& other) {
 	out<< "SKU: " << other.SKU << "\n Description : " << other.Description << "\n Price : " << other.Price << "\n UOM : " << other.UOM << "\n Quantity On Hand : " << other.QuantityOnHand << "\n Lead Time : " << other.LeadTime << endl;
+	return out;
+}
+*/
+ostream& operator <<(ostream& out, const InventoryItem& other) {
+	out << other.SKU << endl;
 	return out;
 }

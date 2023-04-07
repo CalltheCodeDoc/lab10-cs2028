@@ -154,8 +154,8 @@ int Hash<T>::GetLength() {
 template <typename T>
 int Hash<T>::hash(T inval) {
 	int computation;
-	string stringify = to_string(inval);
-	/*
+	//string stringify = to_string(inval);
+	
 	std::ostringstream oss;
 	if constexpr (std::is_pointer<T>::value) {
 		oss << *inval;
@@ -164,7 +164,7 @@ int Hash<T>::hash(T inval) {
 		oss << inval;
 	}
 	std::string stringify = oss.str();
-	*/
+	
 	long value=0;
 	//if (typeid(stringify) == typeid("Hello"))
 	//{
