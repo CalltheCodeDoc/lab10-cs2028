@@ -40,7 +40,6 @@ void Hash<T>::AddItem(T* inval) {
 	unsigned int base_index = hash(*inval)%SIZE;
 	
 	for (int i = 0; i < SIZE; i++) {//linear probing
-		numComparisons++;
 		if (table[(base_index+i)%SIZE] == nullptr) {
 			base_index = (base_index + i) % SIZE;
 			break;
@@ -66,10 +65,11 @@ T* Hash<T>::RemoveItem(T* inval) {
 
 	unsigned int base_index = hash(*inval) % SIZE;
 	//cout << base_index << endl;
-	cout << table[base_index] << endl;
+	//cout << table[base_index] << endl;
 
 	//linear probing
 	for (int i = 0; i < SIZE; i++) {
+
 		if ((table[(base_index + i) % SIZE] != nullptr)&&( *table[(base_index + i) % SIZE] == *inval)) {
 			base_index = (base_index + i) % SIZE;
 			break;
@@ -91,9 +91,10 @@ T* Hash<T>::RemoveItem(T* inval) {
 template <typename T>
 T* Hash<T>::GetItem(T* inval) {
 	unsigned int base_index = hash(*inval) % SIZE;
-	cout << table[base_index] << endl;
+	//cout << table[base_index] << endl;
 	//for loop to handle linear probing
 	for (int i = 0; i < SIZE; i++) {
+		numComparisons++;
 		if ((table[(base_index + i) % SIZE] != nullptr) && (*table[(base_index + i) % SIZE] == *inval)) {
 			base_index = (base_index + i) % SIZE;
 			break;

@@ -70,6 +70,9 @@ T* ChainHash<T>::GetItem(T* inval) {
 	int base_index = hash(*inval);
 	Node<T>* temp = table[base_index % SIZE]->FindItem(inval, table[base_index % SIZE]->head);
 	this->numComparisons += table[base_index % SIZE]->numRecursions;
+	table[base_index % SIZE]->numRecursions = 0;
+	//This samples from the specific linkedlist and its number of comparisons
+	//then it resets that specific linkedlist, so it doesn't double count if that list is later sampled from again
 	if (temp == nullptr)
 		return nullptr;
 	else

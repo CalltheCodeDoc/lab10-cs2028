@@ -81,7 +81,13 @@ int main() {
 	//5)Add exception testing and handling at all levels
 	//
 	//
-	//6)Do the rest of the lab
+	//6)                  implement try catches for all the nullptr exceptions        
+	// 
+	// 
+	// 
+	//
+	// 
+	//
 	//
 	//Task 5: Measure the performance of the linear probing and chained linking implementations of a
 	/*hash table(similar to Lab 7 task 4).To do this, modify both classes to keep track of the number
@@ -113,12 +119,9 @@ int main() {
 	}
 	//finds the students skus that were generated earlier
 	for (int i = 0; i < 50; i++) {
-		//Node<InventoryItem>* poppedstudent = list->GetItem(list->SeeNext(),list->head);
 		InventoryItem* poppedstudent = list->SeeNext();
 		hash->GetItem(poppedstudent);
 		LLhash->GetItem(poppedstudent);
-		//list->Reset();
-
 	}
 	numcomp[0][0] = hash->numComparisons;
 	numcomp[0][1] = LLhash->numComparisons;
@@ -148,6 +151,7 @@ int main() {
 	//flip to true to activate test code
 	bool manual_debug = false;
 
+	//*********************  THIS is used for screenshots
 	if (manual_debug) {
 		ChainHash<InventoryItem>* hash = new ChainHash<InventoryItem>(100);
 		//Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
