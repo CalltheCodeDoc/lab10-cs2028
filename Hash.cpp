@@ -14,6 +14,7 @@ Hash<T>::Hash(){
 		table[i] = nullptr;
 	SIZE = MAX_SIZE;
 	length = 0;
+	numComparisons = 0;
 }
 
 template <typename T>
@@ -37,12 +38,9 @@ void Hash<T>::AddItem(T* inval) {
 	
 
 	unsigned int base_index = hash(*inval)%SIZE;
-	cout << base_index<< endl;
-	//base_index = (base_index + 1) % SIZE;
-	//cout << base_index << endl;
 	
-	//cout << table[base_index]<<endl;
 	for (int i = 0; i < SIZE; i++) {
+		numComparisons++;
 		if (table[(base_index+i)%SIZE] == nullptr) {
 			base_index = (base_index + i) % SIZE;
 			break;
@@ -75,27 +73,6 @@ void Hash<T>::AddItem(T* inval) {
 template <typename T>
 T* Hash<T>::RemoveItem(T* inval) {
 
-	/*
-	int count = 0;
-	int base_index = hash(*inval);
-	while (table[base_index % SIZE] == nullptr || *table[base_index % SIZE] != *inval) {
-		count++;
-		base_index++; //linear probing insertion
-		if (count >= SIZE) {
-			return nullptr;
-		}
-	}
-
-	T* temp = table[base_index];
-	table[base_index] = nullptr;
-	length--;
-	return temp;
-	*/
-
-
-
-
-
 	unsigned int base_index = hash(*inval) % SIZE;
 	//cout << base_index << endl;
 	//base_index = (base_index + 1) % SIZE;
@@ -126,6 +103,7 @@ template <typename T>
 T* Hash<T>::GetItem(T* inval) {
 	unsigned int base_index = hash(*inval) % SIZE;
 	cout << table[base_index] << endl;
+	//for loop to handle linear probing
 	for (int i = 0; i < SIZE; i++) {
 		if ((table[(base_index + i) % SIZE] != nullptr) && (*table[(base_index + i) % SIZE] == *inval)) {
 			base_index = (base_index + i) % SIZE;
@@ -156,6 +134,9 @@ int Hash<T>::hash(T inval) {
 	int computation;
 	//string stringify = to_string(inval);
 	
+	//sends values to stream and also tests to see if inval is pointer or not
+	//a way of forcing even difficult to convert items into string form
+	//stringify doesn't work with all overloaded options
 	std::ostringstream oss;
 	if constexpr (std::is_pointer<T>::value) {
 		oss << *inval;
@@ -178,37 +159,3 @@ int Hash<T>::hash(T inval) {
 
 
 
-/*
-template <typename T>
-bool Hash<T>::operator >(const Hash& rhs) const {
-
-}
-
-template <typename T>
-bool Hash<T>::operator < (const Hash& rhs) const {
-
-}
-
-template <typename T>
-bool Hash<T>::operator == (const Hash& rhs) const {
-
-}
-
-template <typename T>
-bool Hash<T>::operator != (const Hash& rhs) const {
-
-}
-
-template <typename T>
-bool Hash<T>::operator >= (const Hash& rhs) const {
-
-}
-
-template <typename T>
-bool Hash<T>::operator <= (const Hash& rhs) const {
-
-}
-*/
-
-//template class Hash<int>;
-//template class Hash<std::string>;

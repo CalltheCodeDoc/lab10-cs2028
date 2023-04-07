@@ -18,7 +18,7 @@ public:
 
 	
 
-
+	int numComparisons;
 	virtual void AddItem(T* inval);
 	virtual T* RemoveItem(T* inval);
 	virtual T* GetItem(T* inval);
@@ -33,14 +33,6 @@ public:
 
 
 
-	/*
-	bool operator == (const Hash& rhs) const;
-
-	bool operator > (const Hash& rhs) const;
-	bool operator < (const Hash& rhs) const;
-	bool operator != (const Hash& rhs) const;
-	bool operator >= (const Hash& rhs) const;
-	bool operator <= (const Hash& rhs) const;
-	*/
+	
 };
 #endif

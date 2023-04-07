@@ -23,7 +23,7 @@ public:
 	~LinkedList();
 
 
-
+	int numRecursions;
 	//T* LinkedList<T>::searchsku(int SKU, LinkedList<T>* lis);
 
 	//Node<T>* FindItem(T* item, Node<T>* ptr = head);

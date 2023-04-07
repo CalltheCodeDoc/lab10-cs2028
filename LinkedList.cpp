@@ -11,6 +11,7 @@ LinkedList<T>::LinkedList(){
 	tail = nullptr;
 	length = 0;
 	iterator = nullptr;
+	numRecursions = 0;
 }
 //destructor
 template <typename T>
@@ -106,7 +107,6 @@ Node<T>* LinkedList<T>::GetItem(T* item, Node<T>* ptr) {
 	//not done according to function
 	//GetItem – searches the list for the given item.If found, it removes it from
 	///	the listand returns it.If not found, it returns a null pointer.
-
 		if (ptr != nullptr && *ptr->data < *item) {
 			if (ptr->next != nullptr) {
 				return GetItem(item, ptr->next);
@@ -163,6 +163,7 @@ Node<T>* LinkedList<T>::FindItem(T* item, Node<T>* ptr) {
 //GetItem – searches the list for the given item.If found, it removes it from
 ///	the listand returns it.If not found, it returns a null pointer.
 
+	numRecursions++;
 	if (ptr != nullptr && *ptr->data < *item) {
 		if (ptr->next != nullptr) {
 			return GetItem(item, ptr->next);
@@ -248,7 +249,7 @@ the first call returns the last item in the list).
 			return iterator->data;
 		}
 		else {
-			throw "ListNotFlow";
+			//throw "ListNotFlow";
 			return nullptr;
 		}
 	}
@@ -256,7 +257,7 @@ the first call returns the last item in the list).
 	//	return ptr;
 	//}
 	else {
-		throw "ListNotFlow";
+		//throw "ListNotFlow";
 		return nullptr;
 	}
 

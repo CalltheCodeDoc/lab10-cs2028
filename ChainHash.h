@@ -15,12 +15,6 @@ public:
 	ChainHash();
 	ChainHash(int size);
 	~ChainHash();
-	//bool operator > (const ChainHash& rhs) const;
-	//bool operator < (const ChainHash& rhs) const;
-	//bool operator == (const ChainHash& rhs) const;
-	//bool operator != (const ChainHash& rhs) const;
-
-	
 
 	virtual void AddItem(T* inval) override;
 	virtual T* RemoveItem(T* inval) override;
