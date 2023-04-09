@@ -55,14 +55,7 @@ int main() {
 	//					something throws off the number of values by 1, so simple add one extra item than will be removed.  no more problems
 	// 
 	// 
-	// 1.75)   MEMORY LEAKS,  gotta make deletes!!!!!!!!  DELETES TO AVoid THE LEAKS    almost rhymes
-	// 
-	//
-	//2)   HAVE TO DEAL WITH PROPER DELETION OF STUFF WHEN IT DOESNT CONFLICT WITH OTHER USES
-	//					thats NODEs, LINKEDLISTS, HASHES, CHAINHASHES, INVENTORYITEMS
-	//
-	//
-	//3)      CLEAN UP CODE, add functionality comments, remove all commented out stuff.
+	//   DELETES TO AVoid THE LEAKS    almost rhymes
 	// 
 	//	
 	//
@@ -107,7 +100,7 @@ int main() {
 		LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
 		int numcomp[4][2] = { {0} };
 		//generates random values for SKU students and inserts them
-		for (int i = 0; i < ARRAY_SIZE+1; i++) {
+		for (int i = 0; i < ARRAY_SIZE + 1; i++) {
 			InventoryItem* student = generateSKU();
 			list->AddItem(student);
 			hash->AddItem(student);
@@ -127,10 +120,15 @@ int main() {
 		cout << "Linear Probing: " << hash->numComparisons << endl;
 		cout << "Chained Hashing: " << LLhash->numComparisons << endl;
 
+
+
+		delete LLhash;
+		delete hash;
+		delete list;
+
+		cout << "List Deleted" << endl;
+
 	}
-
-
-
 
 
 
@@ -270,6 +268,7 @@ int main() {
 		list->AddItem(item7);
 		list->AddItem(item8);
 
+		//this list is used to keep track of items in hash table
 		lis->AddItem(item1);
 		lis->AddItem(item2);
 		lis->AddItem(item3);

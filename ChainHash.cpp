@@ -34,6 +34,12 @@ ChainHash<T>::ChainHash(int size) : Hash<T>(size) {
 
 template <typename T>
 ChainHash<T>::~ChainHash() {
+	for (int i = 0; i < SIZE; ++i) {
+		table[i] = nullptr;
+	}
+	delete[] table;
+	table = nullptr;
+	//design decision to not delete contents of items in table, as class did not create those items
 }
 
 
@@ -41,7 +47,7 @@ ChainHash<T>::~ChainHash() {
 
 template <typename T>
 void ChainHash<T>::Display() const {
-
+	//Dispays all table slots and also linkedlist slots
 	for (int k = 0; k < SIZE; k++) {
 
 		if (table[k] == nullptr) {
@@ -61,6 +67,7 @@ void ChainHash<T>::Display() const {
 
 template <typename T>
 void ChainHash<T>::AddItem(T* inval) {
+	//adds an item to a table spot and ten a linkedlist slot
 	int base_index = hash(*inval);
 	this->table[base_index%SIZE]->AddItem(inval);
 	this->items++;
@@ -68,10 +75,16 @@ void ChainHash<T>::AddItem(T* inval) {
 
 template <typename T>
 T* ChainHash<T>::RemoveItem(T* inval) {
+	//removes and returns an item from a linkedlist slot in a table slot
 	int base_index = hash(*inval);
 	
 	Node<T>* temp = table[base_index % SIZE]->GetItem(inval, table[base_index % SIZE]->head);
-	this->items--;
+	if (temp == nullptr) {
+		//"No Item is removed"
+	}
+	else {
+		this->items--;
+	}
 	/*
 	try {
 		Node<T>* temp = table[base_index % SIZE]->GetItem(inval, table[base_index % SIZE]->head);
@@ -88,6 +101,7 @@ T* ChainHash<T>::RemoveItem(T* inval) {
 
 template <typename T>
 T* ChainHash<T>::GetItem(T* inval) {
+	//fetches an item in the linked list within a table slot, does not remove it
 	int base_index = hash(*inval);
 	Node<T>* temp = table[base_index % SIZE]->FindItem(inval, table[base_index % SIZE]->head);
 	this->numComparisons += table[base_index % SIZE]->numRecursions;
@@ -102,11 +116,13 @@ T* ChainHash<T>::GetItem(T* inval) {
 
 template <typename T>
 int ChainHash<T>::GetLength() {
+	//number of items stored in hash
 	return items;
 }
 
 template <typename T>
 int ChainHash<T>::hash(T inval) {
+	//hash algorithm that sums the ascii values of each digit of the inval argument
 	int computation;
 	//string stringify = to_string(inval);
 	std::ostringstream oss;

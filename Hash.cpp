@@ -27,8 +27,12 @@ Hash<T>::Hash(int const size) {
 
 template <typename T>
 Hash<T>::~Hash(){
+	for (int i = 0; i < SIZE; ++i) {
+		table[i]=nullptr;
+	}
 	delete[] table;
 	table = nullptr;
+	//design decision to not delete contents of items in table, as class did not create those items
 }
 
 
@@ -95,7 +99,7 @@ T** Hash<T>::GetTable() const {
 
 template <typename T>
 void Hash<T>::Display() const {
-	
+	//Displays all table slots
 	for (int k = 0; k < SIZE; k++) {
 
 		if (table[k] == nullptr) {
@@ -133,6 +137,7 @@ T* Hash<T>::GetItem(T* inval) {
 //GetLength – returns an int indicating the number of items in the table.
 template <typename T>
 int Hash<T>::GetLength() {
+	//returns number of items stored in table
 	return length;
 }
 
