@@ -86,6 +86,28 @@ T* Hash<T>::RemoveItem(T* inval) {
 	return temp;
 }
 
+
+template <typename T>
+T** Hash<T>::GetTable() const {
+	return table;
+}
+
+
+template <typename T>
+void Hash<T>::Display() const {
+	
+	for (int k = 0; k < SIZE; k++) {
+
+		if (table[k] == nullptr) {
+			cout << "Slot " << k << " is Empty" << endl;
+		}  
+		else {
+			cout << *table[k] << endl;
+		}
+	}
+	cout << endl;
+}
+
 //GetItem – searches the list for a given item. If found, it returns a pointer
 //to the item but doesn’t remove it from the list.
 template <typename T>

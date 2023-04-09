@@ -22,11 +22,11 @@ using namespace std;
 
 InventoryItem* searchsku2(int SKU, LinkedList<InventoryItem>* lis);
 InventoryItem* generateSKU();
-string first_name[48] = {
+string first_name[50] = {
 		"John", "Jane", "Michael", "Emily", "James", "Emma", "William", "Olivia",
 		"David", "Sophia", "Benjamin", "Isabella", "Lucas", "Ava", "Henry", "Mia",
 		"Alexander", "Charlotte", "Sebastian", "Amelia", "Jack", "Harper",
-		"Daniel", "Evelyn", "Aiden", "Abigail", "Matthew", "Emily", "Samuel", "Ella",
+		"Daniel", "Evelyn", "Aiden", "Abigail", "Ramona", "Morgan", "Matthew", "Emily", "Samuel", "Ella",
 		"Joseph", "Scarlett", "Joshua", "Grace", "Andrew", "Chloe", "Nicholas", "Victoria",
 		"Christopher", "Riley", "Gabriel", "Aria", "Nathan", "Lily", "Christian", "Zoe",
 		"Aaron", "Layla"
@@ -79,7 +79,7 @@ int main() {
 	// 
 	//
 	// 
-	//
+	//7)			Removeitem creates a junk value,  gotta fix that,   maybe its the stray delete doing that  
 	//
 	// 
 	// 
@@ -139,7 +139,7 @@ int main() {
 	//*********************************  TEST CODE  ***********************************************
 	//**********************************************************************************************
 	//CODE Below until end of main is just test code, ignore it.  though there are some functions
-	// at the very bottom of code
+	// at the very bottom of code and also lab 8 stuff
 	//**********************************************************************************************
 	//**********************************************************************************************
 
@@ -231,36 +231,61 @@ int main() {
 	//for TASK 3
 
 
-	bool TASK_3 = false;
+	bool TASK_3 = true;
 
 	if (TASK_3) {
 
 		system("Color 0A");
 		int userresponse;
 		char userresponse1;
-
+		bool CHAINED_HASH = true;
 
 		InventoryItem* temp2;
-		LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
-		Node<InventoryItem>* temp = new Node<InventoryItem>(new InventoryItem(6879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20), list->head);
+		
+		ChainHash<InventoryItem>* list = new ChainHash<InventoryItem>(12);
+		//uncomment this out to normal HASH
+		// ******************************************************************************************
+		//Hash<InventoryItem>* list = new Hash<InventoryItem>(12);
+		
+		LinkedList<InventoryItem>* lis = new LinkedList<InventoryItem>();
+		//Node<InventoryItem>* temp = new Node<InventoryItem>(new InventoryItem(6879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20), list->head);
 		//^^^^ Don't do node<inventoryItem
 
 
-		list->AddItem(new InventoryItem(3879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(2589, "Ipad", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(1687, "BeanBag Chair", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(9579, "Air Jordans", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(5879, "Oled TV", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(589, "Palantir", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(5687, "Apple PC", 600, "UOM whatever that is", 5, 20));
-		list->AddItem(new InventoryItem(4579, "XboxOne gaming console", 600, "UOM whatever that is", 5, 20));
+		InventoryItem* item1 = new InventoryItem(3879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item2 = new InventoryItem(2589, "Ipad", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item3 = new InventoryItem(1687, "BeanBag Chair", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item4 = new InventoryItem(9579, "Air Jordans", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item5 = new InventoryItem(5879, "Oled TV", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item6 = new InventoryItem(589, "Palantir", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item7 = new InventoryItem(5687, "Apple PC", 600, "UOM whatever that is", 5, 20);
+		InventoryItem* item8 = new InventoryItem(4579, "XboxOne gaming console", 600, "UOM whatever that is", 5, 20);
+		
+		list->AddItem(item1);
+		list->AddItem(item2);
+		list->AddItem(item3);
+		list->AddItem(item4);
+		list->AddItem(item5);
+		list->AddItem(item6);
+		list->AddItem(item7);
+		list->AddItem(item8);
+
+		lis->AddItem(item1);
+		lis->AddItem(item2);
+		lis->AddItem(item3);
+		lis->AddItem(item4);
+		lis->AddItem(item5);
+		lis->AddItem(item6);
+		lis->AddItem(item7);
+		lis->AddItem(item8);
 
 
-
-		list->NotYetMergeSort();
+		//list->NotYetMergeSort();
 		list->Display();
 
-		Node<InventoryItem>* temp3;
+		lis->Display();
+
+		InventoryItem* temp3;
 
 
 		int SKU;
@@ -277,19 +302,20 @@ int main() {
 		do {
 			do {
 
-				cout << "This is a test of the LinkedList class." << endl;
+				cout << "This is a test of the Hash Table class." << endl;
 				//cout << "Type 1 for: LinkedList();" << endl;
 				cout << "Type 2 activate destructor for the list" << endl;
-				cout << "Type 3 to use AddItem(T * item) method to add an item into the list" << endl;
-				cout << "Type 4 to use GetItem(T * item, Node<T>*ptr) method to retrieve and remove and item from the list" << endl;
-				cout << "Type 5 to see if item is in the list using the method: IsInList(T * item)" << endl;
-				cout << "Type 6 to see if the list is empty using the method: IsEmpty()" << endl;
-				cout << "Type 7 to see how many nodes are in the list using the method: Size()" << endl;
-				cout << "Type 8 to iterate forwards through the list using T* SeeNext() method" << endl;
-				cout << "Type 9 to iterate backwards through the list using  T* SeePrev() method" << endl;
-				cout << "Type 10 to use SeeAt(T*, Node<T>*ptr) method" << endl;
-				cout << "Type 11 to Reset iterator back to head pointer used for SEENEXT, SEEPREV methods" << endl;
-				cout << "Type 12 to manually sort inventory by SKU number" << endl;
+				cout << "Type 3 to use AddItem(T * item) method to add an item into the Hash" << endl;
+				cout << "Type 4 to use GetItem(T * item, Node<T>*ptr) method to retrieve and remove and item from the Hash" << endl;
+				cout << "Type 5 to use RemoveItem(T * item, Node<T>*ptr) method to retrieve and remove and item from the Hash" << endl;
+				//cout << "Type 5 to see if item is in the list using the method: IsInList(T * item)" << endl;
+				//cout << "Type 6 to see if the list is empty using the method: IsEmpty()" << endl;
+				cout << "Type 7 to see how many nodes are in the Hash using length attribute" << endl;
+				//cout << "Type 8 to iterate forwards through the list using T* SeeNext() method" << endl;
+				//cout << "Type 9 to iterate backwards through the list using  T* SeePrev() method" << endl;
+				//cout << "Type 10 to use SeeAt(T*, Node<T>*ptr) method" << endl;
+				//cout << "Type 11 to Reset iterator back to head pointer used for SEENEXT, SEEPREV methods" << endl;
+				//cout << "Type 12 to manually sort inventory by SKU number" << endl;
 				cout << "Type 13 to Display all inventory" << endl;
 				//cout << "Type 14 for: void displayskus(LinkedList<InventoryItem>* lis)" << endl;
 				cout << "Type 14 to terminate program" << endl;
@@ -335,7 +361,7 @@ int main() {
 				getline(cin, desc);
 				cout << "Adding item to list..." << endl;
 				list->AddItem(new InventoryItem(SKU, desc, price, uom, lead, quantity));
-				list->NotYetMergeSort();
+				//list->NotYetMergeSort();
 				break;
 
 			case 4:
@@ -347,7 +373,7 @@ int main() {
 				//Node<InventoryItem>* searchsku(int SKU, LinkedList<InventoryItem>*lis)
 
 				try {
-					InventoryItem* temp4 = searchsku2(SKU, list);
+					InventoryItem* temp4 = searchsku2(SKU, lis);
 					if (temp4 == nullptr)
 					{
 						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
@@ -355,19 +381,19 @@ int main() {
 					else {
 
 
-						temp3 = list->GetItem(temp4, list->head);
+						temp3 = list->GetItem(temp4);
 						if (temp3 == nullptr)
 						{
 							throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
 						}
 						else {
 
-							cout << temp3->data->GetPartInfo() << " Is the item retrieved " << endl;
-							delete temp3->data;
-							temp3->data = nullptr;
-							//probably should make destructor handle this stuff automatically
+							cout << temp3->GetPartInfo() << " Is the item retrieved " << endl;
 							delete temp3;
-							temp3 = nullptr;
+							//temp3->data = nullptr;
+							//probably should make destructor handle this stuff automatically
+							//delete temp3;
+							//temp3 = nullptr;
 
 						}
 					}
@@ -378,81 +404,36 @@ int main() {
 				break;
 				//add additional code to display the item to the user indicating its in stock
 			case 5:
-				cout << "Check to see if an item is in the list." << endl;
-				cout << "Type in the SKU of the item you want to check: " << endl;
+				cout << "Type in the SKU of the item you want to remove: " << endl;
 				cin >> SKU;
 				cin.ignore();
-				Isin = list->IsInList(searchsku2(SKU, list)); //replace T * item with proper coding
-				if (Isin) {
-					cout << "Item is in the list." << endl;
-				}
-				else {
-					cout << "Item is not in the list." << endl;
-				}
-				break;
-			case 6:
-				cout << "Check to see if the list is empty." << endl;
-				cout << "It is: " << list->IsEmpty() << " that the list is empty." << endl;
-				break;
-			case 7:
-				cout << "The size of the list is: " << endl;
-				cout << list->Size() << endl;
-				break;
-			case 8:
-				cout << "See the next item in the list." << endl;
+				//if not available, message this to customer,
+				//or just use available() method
+				//Node<InventoryItem>* searchsku(int SKU, LinkedList<InventoryItem>*lis)
+
 				try {
-					temp2 = list->SeeNext();
-					if (temp2 == nullptr)
+					InventoryItem* temp4 = searchsku2(SKU, lis);
+					if (temp4 == nullptr)
 					{
 						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
 					}
 					else {
-						cout << temp2->GetPartInfo() << endl; //this sees a pointer, probably wanna see SKU or description
-					}
-				}
-				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
-					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
-				}
-				break;
-			case 9:
-				cout << "See the previous item in the list." << endl;
-				try {
-					temp2 = list->SeePrev();
-					if (temp2 == nullptr)
-					{
-						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
-					}
-					else {
-						cout << temp2->GetPartInfo() << endl; //this sees a pointers; probably wanna see SKU or description
-					}
-				}
-				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
-					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
-				}
-				break;
-			case 10:
-				cout << "See the item at a specific location in the list." << endl;
-				cout << "Type in the SKU of the item you want to see: " << endl;
-				cin >> SKU;
-				try {
-					//might have to change function to pay attention to SKU, not pointer
-					InventoryItem* temp5 = searchsku2(SKU, list);
-					if (temp5 == nullptr)
-					{
-						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
-					}
-					else {
-						temp = list->SeeAt(temp5, list->head);
-						if (temp == nullptr)
+
+
+						temp3 = list->RemoveItem(temp4);
+						if (temp3 == nullptr)
 						{
 							throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
 						}
 						else {
-							//temp = list->SeeAt(searchsku2(SKU, list), list->head);
-							cout << temp->data << endl; //this sees a pointer, probably wanna see SKU or description
-							//also replace T* with some mangled mess of data->getSKU(SKU)
-							//*************************************************************
-							//DUNNO WHAT YAH WANT TO SEE , the DATA, pointer, SKU?
+
+							cout << temp3->GetPartInfo() << " Is the item retrieved " << endl;
+							delete temp3;
+							//temp3->data = nullptr;
+							//probably should make destructor handle this stuff automatically
+							//delete temp3;
+							//temp3 = nullptr;
+
 						}
 					}
 				}
@@ -460,17 +441,101 @@ int main() {
 					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
 				}
 				break;
+				break;
+			case 50:
+				//cout << "Check to see if an item is in the list." << endl;
+				//cout << "Type in the SKU of the item you want to check: " << endl;
+				//cin >> SKU;
+				//cin.ignore();
+				//Isin = list->IsInList(searchsku2(SKU, list)); //replace T * item with proper coding
+				//if (Isin) {
+				//	cout << "Item is in the list." << endl;
+				//}
+				//else {
+				//	cout << "Item is not in the list." << endl;
+				//}
+				break;
+			case 6:
+				/*cout << "Check to see if the list is empty." << endl;
+				cout << "It is: " << list->IsEmpty() << " that the list is empty." << endl;*/
+				break;
+			case 7:
+				cout << "The size of the list is: " << endl;
+				cout << list->length << endl;
+				break;
+			case 8:
+				//cout << "See the next item in the list." << endl;
+				//try {
+				//	temp2 = list->SeeNext();
+				//	if (temp2 == nullptr)
+				//	{
+				//		throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+				//	}
+				//	else {
+				//		cout << temp2->GetPartInfo() << endl; //this sees a pointer, probably wanna see SKU or description
+				//	}
+				//}
+				//catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+				//	std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				//}
+				break;
+			case 9:
+				//cout << "See the previous item in the list." << endl;
+				//try {
+				//	temp2 = list->SeePrev();
+				//	if (temp2 == nullptr)
+				//	{
+				//		throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+				//	}
+				//	else {
+				//		cout << temp2->GetPartInfo() << endl; //this sees a pointers; probably wanna see SKU or description
+				//	}
+				//}
+				//catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+				//	std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				//}
+				break;
+			case 10:
+				//cout << "See the item at a specific location in the list." << endl;
+				//cout << "Type in the SKU of the item you want to see: " << endl;
+				//cin >> SKU;
+				//try {
+				//	//might have to change function to pay attention to SKU, not pointer
+				//	InventoryItem* temp5 = searchsku2(SKU, list);
+				//	if (temp5 == nullptr)
+				//	{
+				//		throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+				//	}
+				//	else {
+				//		temp = list->SeeAt(temp5, list->head);
+				//		if (temp == nullptr)
+				//		{
+				//			throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+				//		}
+				//		else {
+				//			//temp = list->SeeAt(searchsku2(SKU, list), list->head);
+				//			cout << temp->data << endl; //this sees a pointer, probably wanna see SKU or description
+				//			//also replace T* with some mangled mess of data->getSKU(SKU)
+				//			//*************************************************************
+				//			//DUNNO WHAT YAH WANT TO SEE , the DATA, pointer, SKU?
+				//		}
+				//	}
+				//}
+				//catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+				//	std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				//}
+				break;
 			case 11:
-				cout << "Reset the iterator view of the list to 0" << endl;
-				list->Reset();
+				/*cout << "Reset the iterator view of the list to 0" << endl;
+				list->Reset();*/
 				break;
 			case 12:
-				cout << "Sort the list by SKU" << endl;
-				cout << "This should be done whenever u wanna access items after adding items." << endl;
-				//***********************  
-				//  OR THIS FUNCTION SHOULD BE CALLED AUTOMATICALLY everytime additems is called
-				list->NotYetMergeSort();
-				list->Display();
+				//cout << "Sort the list by SKU" << endl;
+				//cout << "This should be done whenever u wanna access items after adding items." << endl;
+				////***********************  
+				////  OR THIS FUNCTION SHOULD BE CALLED AUTOMATICALLY everytime additems is called
+				//list->NotYetMergeSort();
+				//list->Display();
 				break;
 			case 13:
 				cout << "Display the list." << endl;

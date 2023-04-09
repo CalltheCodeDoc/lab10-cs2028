@@ -38,6 +38,27 @@ ChainHash<T>::~ChainHash() {
 
 
 
+
+template <typename T>
+void ChainHash<T>::Display() const {
+
+	for (int k = 0; k < SIZE; k++) {
+
+		if (table[k] == nullptr) {
+			cout << "Slot " << k << " is Empty" << endl;
+		}
+		else if (table[k]->IsEmpty()) {
+			cout << "Slot " << k << " is Empty" << endl;
+		} else {
+			cout << "Slot " << k << " Contains :" << endl;
+			table[k]->Display();
+		}
+	}
+	cout << endl;
+}
+
+
+
 template <typename T>
 void ChainHash<T>::AddItem(T* inval) {
 	int base_index = hash(*inval);

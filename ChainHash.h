@@ -20,6 +20,7 @@ public:
 	virtual T* RemoveItem(T* inval) override;
 	virtual T* GetItem(T* inval) override;
 	virtual int GetLength() override;
+	virtual void Display() const override;
 
 	//gotta fix the privacy issues,  a lot of functions dont work when private
 //private:

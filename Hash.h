@@ -21,8 +21,10 @@ public:
 	int numComparisons;
 	virtual void AddItem(T* inval);
 	virtual T* RemoveItem(T* inval);
+	virtual T** GetTable() const;
 	virtual T* GetItem(T* inval);
 	virtual int GetLength();
+	virtual void Display() const;
 	//gotta fix the privacy issues,  a lot of functions dont work when private
 //private:
 	unsigned long key;
