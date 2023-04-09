@@ -91,16 +91,16 @@ int main() {
 	bool TASK_5 = true;
 	// Task 5   TEST PROGRAM
 	if (TASK_5) {
-		int const ARRAY_SIZE = 50; //50,150, 200, 250
-
+		int const ARRAY_SIZE = 51; //50,150, 200, 250
+		int const Generateunits = 50;
 		//create different hashs and lists
 		//hashes for comparison, list to store objects to keep track of for later
-		ChainHash<InventoryItem>* LLhash = new ChainHash<InventoryItem>(100);
-		Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
+		ChainHash<InventoryItem>* LLhash = new ChainHash<InventoryItem>(ARRAY_SIZE);
+		Hash<InventoryItem>* hash = new Hash<InventoryItem>(ARRAY_SIZE);
 		LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
 		int numcomp[4][2] = { {0} };
 		//generates random values for SKU students and inserts them
-		for (int i = 0; i < ARRAY_SIZE + 1; i++) {
+		for (int i = 0; i < Generateunits; i++) {
 			InventoryItem* student = generateSKU();
 			list->AddItem(student);
 			hash->AddItem(student);
@@ -108,7 +108,7 @@ int main() {
 
 		}
 		//finds the students skus that were generated earlier
-		for (int i = 0; i < ARRAY_SIZE; i++) {
+		for (int i = 0; i < Generateunits-2; i++) {
 			InventoryItem* poppedstudent = list->SeeNext();
 			hash->GetItem(poppedstudent);
 			LLhash->GetItem(poppedstudent);
@@ -121,7 +121,8 @@ int main() {
 		cout << "Chained Hashing: " << LLhash->numComparisons << endl;
 
 
-
+		//only deleting the linked list will delete the SKU objects from memory
+		//the first two deletes only remove access containers
 		delete LLhash;
 		delete hash;
 		delete list;
@@ -229,7 +230,7 @@ int main() {
 	//for TASK 3
 
 
-	bool TASK_3 = true;
+	bool TASK_3 = false;
 
 	if (TASK_3) {
 
@@ -240,10 +241,10 @@ int main() {
 
 		InventoryItem* temp2;
 		
-		ChainHash<InventoryItem>* list = new ChainHash<InventoryItem>(12);
+		//ChainHash<InventoryItem>* list = new ChainHash<InventoryItem>(12);
 		//uncomment this out to normal HASH
 		// ******************************************************************************************
-		//Hash<InventoryItem>* list = new Hash<InventoryItem>(12);
+		Hash<InventoryItem>* list = new Hash<InventoryItem>(12);
 		
 		LinkedList<InventoryItem>* lis = new LinkedList<InventoryItem>();
 		//Node<InventoryItem>* temp = new Node<InventoryItem>(new InventoryItem(6879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20), list->head);
