@@ -16,7 +16,9 @@
 
 
 
+
 using namespace std;
+
 
 InventoryItem* searchsku2(int SKU, LinkedList<InventoryItem>* lis);
 InventoryItem* generateSKU();
@@ -60,17 +62,7 @@ int main() {
 	//					thats NODEs, LINKEDLISTS, HASHES, CHAINHASHES, INVENTORYITEMS
 	//
 	//
-	//3)			FOR LAB REPORT:
-	// 
-	// Task 3: Modify your test program from Lab 8, Task 3 (test program) to test your Hash Table
-	//class.Include a screen shot of some of this testing in your lab report.
-	//	Complete this before moving on to task 4.
-	//	Task 4 : Create a derived class from your Hash table that implements a chained hash table.Use
-	//	your linked list class from Lab 8, Task 1. Modify your test program from Task 3 to test this new
-	//	class.Include a screen shot of some of this testing in your lab report.
-	// 
-	// 
-	// 3.5)      CLEAN UP CODE, add functionality comments, remove all commented out stuff.
+	//3)      CLEAN UP CODE, add functionality comments, remove all commented out stuff.
 	// 
 	//	
 	//
@@ -89,6 +81,9 @@ int main() {
 	// 
 	//
 	//
+	// 
+	// 
+	// 
 	//Task 5: Measure the performance of the linear probing and chained linking implementations of a
 	/*hash table(similar to Lab 7 task 4).To do this, modify both classes to keep track of the number
 		of times an item is compared in the chain for chained linkingiiand the number of times an
@@ -100,37 +95,39 @@ int main() {
 		from the 4 trials for the 2 different classes in your lab report*/
 	//
 
+	bool TASK_5 = true;
+	// Task 5   TEST PROGRAM
+	if (TASK_5) {
+		int const ARRAY_SIZE = 50; //50,150, 200, 250
 
-	int const ARRAY_SIZE = 50;
+		//create different hashs and lists
+		//hashes for comparison, list to store objects to keep track of for later
+		ChainHash<InventoryItem>* LLhash = new ChainHash<InventoryItem>(100);
+		Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
+		LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
+		int numcomp[4][2] = { {0} };
+		//generates random values for SKU students and inserts them
+		for (int i = 0; i < ARRAY_SIZE+1; i++) {
+			InventoryItem* student = generateSKU();
+			list->AddItem(student);
+			hash->AddItem(student);
+			LLhash->AddItem(student);
 
-	//create different hashs and lists
-	//hashes for comparison, list to store objects to keep track of for later
-	ChainHash<InventoryItem>* LLhash = new ChainHash<InventoryItem>(100);
-	Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
-	LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
-	int numcomp[4][2] = { {0} };
-	//generates random values for SKU students and inserts them
-	for (int i = 0; i < 51; i++) {
-		InventoryItem* student = generateSKU();
-		list->AddItem(student);
-		hash->AddItem(student);
-		LLhash->AddItem(student);
+		}
+		//finds the students skus that were generated earlier
+		for (int i = 0; i < ARRAY_SIZE; i++) {
+			InventoryItem* poppedstudent = list->SeeNext();
+			hash->GetItem(poppedstudent);
+			LLhash->GetItem(poppedstudent);
+		}
+		numcomp[0][0] = hash->numComparisons;
+		numcomp[0][1] = LLhash->numComparisons;
+		//prints out results
+		cout << "Num of Comparisons: for Array Size of : " << ARRAY_SIZE << endl;
+		cout << "Linear Probing: " << hash->numComparisons << endl;
+		cout << "Chained Hashing: " << LLhash->numComparisons << endl;
 
 	}
-	//finds the students skus that were generated earlier
-	for (int i = 0; i < 50; i++) {
-		InventoryItem* poppedstudent = list->SeeNext();
-		hash->GetItem(poppedstudent);
-		LLhash->GetItem(poppedstudent);
-	}
-	numcomp[0][0] = hash->numComparisons;
-	numcomp[0][1] = LLhash->numComparisons;
-	//prints out results
-	cout << "Num of Comparisons" << endl;
-	cout << "Linear Probing: " << hash->numComparisons << endl;
-	cout << "Chained Hashing: " << LLhash->numComparisons << endl;
-
-
 
 
 
@@ -148,13 +145,29 @@ int main() {
 
 
 
+
+
+
+
+	// Task 3: Modify your test program from Lab 8, Task 3 (test program) to test your Hash Table
+	//class.Include a screen shot of some of this testing in your lab report.
+	//	Complete this before moving on to task 4.
+	//	Task 4 : Create a derived class from your Hash table that implements a chained hash table.Use
+	//	your linked list class from Lab 8, Task 1. Modify your test program from Task 3 to test this new
+	//	class.Include a screen shot of some of this testing in your lab report.
+	
+	// 
+	// 
 	//flip to true to activate test code
 	bool manual_debug = false;
 
 	//*********************  THIS is used for screenshots
 	if (manual_debug) {
-		ChainHash<InventoryItem>* hash = new ChainHash<InventoryItem>(100);
-		//Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
+
+		//							TASK 4
+		//ChainHash<InventoryItem>* hash = new ChainHash<InventoryItem>(100);
+		//							TASK 3
+		Hash<InventoryItem>* hash = new Hash<InventoryItem>(100);
 		InventoryItem* test = new InventoryItem(3879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20);
 		hash->AddItem(test);
 		hash->AddItem(new InventoryItem(2589, "Ipad", 600, "UOM whatever that is", 5, 20));
@@ -189,6 +202,302 @@ int main() {
 		hash->RemoveItem(new int(15));*/
 	}
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	//**************************************************************************************************************************		
+	//*********************************  TEST PROGRAM FROM LAB 8  ********************************************************************************
+	//**************************************************************************************************************************
+
+
+
+	//modify this to work with your hash table class some how??????????????    
+	//hoooowwwww???????????
+	//for TASK 3
+
+
+	bool TASK_3 = false;
+
+	if (TASK_3) {
+
+		system("Color 0A");
+		int userresponse;
+		char userresponse1;
+
+
+		InventoryItem* temp2;
+		LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
+		Node<InventoryItem>* temp = new Node<InventoryItem>(new InventoryItem(6879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20), list->head);
+		//^^^^ Don't do node<inventoryItem
+
+
+		list->AddItem(new InventoryItem(3879, "PS5 gaming console", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(2589, "Ipad", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(1687, "BeanBag Chair", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(9579, "Air Jordans", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(5879, "Oled TV", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(589, "Palantir", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(5687, "Apple PC", 600, "UOM whatever that is", 5, 20));
+		list->AddItem(new InventoryItem(4579, "XboxOne gaming console", 600, "UOM whatever that is", 5, 20));
+
+
+
+		list->NotYetMergeSort();
+		list->Display();
+
+		Node<InventoryItem>* temp3;
+
+
+		int SKU;
+		//int arrgindex;
+		int quantity;
+		double price;
+		string uom;
+		double lead;
+		string desc;
+
+
+		bool Isin;
+
+		do {
+			do {
+
+				cout << "This is a test of the LinkedList class." << endl;
+				//cout << "Type 1 for: LinkedList();" << endl;
+				cout << "Type 2 activate destructor for the list" << endl;
+				cout << "Type 3 to use AddItem(T * item) method to add an item into the list" << endl;
+				cout << "Type 4 to use GetItem(T * item, Node<T>*ptr) method to retrieve and remove and item from the list" << endl;
+				cout << "Type 5 to see if item is in the list using the method: IsInList(T * item)" << endl;
+				cout << "Type 6 to see if the list is empty using the method: IsEmpty()" << endl;
+				cout << "Type 7 to see how many nodes are in the list using the method: Size()" << endl;
+				cout << "Type 8 to iterate forwards through the list using T* SeeNext() method" << endl;
+				cout << "Type 9 to iterate backwards through the list using  T* SeePrev() method" << endl;
+				cout << "Type 10 to use SeeAt(T*, Node<T>*ptr) method" << endl;
+				cout << "Type 11 to Reset iterator back to head pointer used for SEENEXT, SEEPREV methods" << endl;
+				cout << "Type 12 to manually sort inventory by SKU number" << endl;
+				cout << "Type 13 to Display all inventory" << endl;
+				//cout << "Type 14 for: void displayskus(LinkedList<InventoryItem>* lis)" << endl;
+				cout << "Type 14 to terminate program" << endl;
+				cin >> userresponse;
+				cin.ignore();
+				//getline(cin, userresponse);
+
+			} while (userresponse > 14 || userresponse < 1);
+			cin.clear();
+			switch (userresponse) {
+			case 1:
+				//cout << "Creating empty list..." << endl;
+				//LinkedList<InventoryItem>* list = new LinkedList<InventoryItem>();
+				break;
+				//****************************************
+				//use try catches in all of these to make sure list exists first and is not empty
+				//so that the program doesnt crash when it tries to access a nullptr by user being dumbdumb
+			case 2:
+				cout << "Deleting list..." << endl;
+				//Gotta delete all ints* in the list too
+				//nodes too???
+				delete list;
+				break;
+			case 3:
+				cout << "To add an item please enter the values of the inventory item:" << endl;
+				cout << "integer SKU: " << endl;
+
+				cin >> SKU;
+				cin.ignore();
+				//getline(cin, SKU);
+				cout << "Quantity: " << endl;
+				cin >> quantity;
+				cin.ignore();
+				cout << "Price: " << endl;
+				cin >> price;
+				cin.ignore();
+				cout << "Unit of Measure: " << endl;
+				getline(cin, uom);
+				cout << "Lead Time: " << endl;
+				cin >> lead;
+				cin.ignore();
+				cout << "Description: " << endl;
+				getline(cin, desc);
+				cout << "Adding item to list..." << endl;
+				list->AddItem(new InventoryItem(SKU, desc, price, uom, lead, quantity));
+				list->NotYetMergeSort();
+				break;
+
+			case 4:
+				cout << "Type in the SKU of the item you want to get: " << endl;
+				cin >> SKU;
+				cin.ignore();
+				//if not available, message this to customer,
+				//or just use available() method
+				//Node<InventoryItem>* searchsku(int SKU, LinkedList<InventoryItem>*lis)
+
+				try {
+					InventoryItem* temp4 = searchsku2(SKU, list);
+					if (temp4 == nullptr)
+					{
+						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+					}
+					else {
+
+
+						temp3 = list->GetItem(temp4, list->head);
+						if (temp3 == nullptr)
+						{
+							throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+						}
+						else {
+
+							cout << temp3->data->GetPartInfo() << " Is the item retrieved " << endl;
+							delete temp3->data;
+							temp3->data = nullptr;
+							//probably should make destructor handle this stuff automatically
+							delete temp3;
+							temp3 = nullptr;
+
+						}
+					}
+				}
+				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				}
+				break;
+				//add additional code to display the item to the user indicating its in stock
+			case 5:
+				cout << "Check to see if an item is in the list." << endl;
+				cout << "Type in the SKU of the item you want to check: " << endl;
+				cin >> SKU;
+				cin.ignore();
+				Isin = list->IsInList(searchsku2(SKU, list)); //replace T * item with proper coding
+				if (Isin) {
+					cout << "Item is in the list." << endl;
+				}
+				else {
+					cout << "Item is not in the list." << endl;
+				}
+				break;
+			case 6:
+				cout << "Check to see if the list is empty." << endl;
+				cout << "It is: " << list->IsEmpty() << " that the list is empty." << endl;
+				break;
+			case 7:
+				cout << "The size of the list is: " << endl;
+				cout << list->Size() << endl;
+				break;
+			case 8:
+				cout << "See the next item in the list." << endl;
+				try {
+					temp2 = list->SeeNext();
+					if (temp2 == nullptr)
+					{
+						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+					}
+					else {
+						cout << temp2->GetPartInfo() << endl; //this sees a pointer, probably wanna see SKU or description
+					}
+				}
+				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				}
+				break;
+			case 9:
+				cout << "See the previous item in the list." << endl;
+				try {
+					temp2 = list->SeePrev();
+					if (temp2 == nullptr)
+					{
+						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+					}
+					else {
+						cout << temp2->GetPartInfo() << endl; //this sees a pointers; probably wanna see SKU or description
+					}
+				}
+				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				}
+				break;
+			case 10:
+				cout << "See the item at a specific location in the list." << endl;
+				cout << "Type in the SKU of the item you want to see: " << endl;
+				cin >> SKU;
+				try {
+					//might have to change function to pay attention to SKU, not pointer
+					InventoryItem* temp5 = searchsku2(SKU, list);
+					if (temp5 == nullptr)
+					{
+						throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+					}
+					else {
+						temp = list->SeeAt(temp5, list->head);
+						if (temp == nullptr)
+						{
+							throw LinkedList<InventoryItem>::ListNotFlow("Item not found in list");
+						}
+						else {
+							//temp = list->SeeAt(searchsku2(SKU, list), list->head);
+							cout << temp->data << endl; //this sees a pointer, probably wanna see SKU or description
+							//also replace T* with some mangled mess of data->getSKU(SKU)
+							//*************************************************************
+							//DUNNO WHAT YAH WANT TO SEE , the DATA, pointer, SKU?
+						}
+					}
+				}
+				catch (const LinkedList<InventoryItem>::ListNotFlow& e) {
+					std::cerr << "Caught MyClass::MyException: " << e.what() << std::endl;
+				}
+				break;
+			case 11:
+				cout << "Reset the iterator view of the list to 0" << endl;
+				list->Reset();
+				break;
+			case 12:
+				cout << "Sort the list by SKU" << endl;
+				cout << "This should be done whenever u wanna access items after adding items." << endl;
+				//***********************  
+				//  OR THIS FUNCTION SHOULD BE CALLED AUTOMATICALLY everytime additems is called
+				list->NotYetMergeSort();
+				list->Display();
+				break;
+			case 13:
+				cout << "Display the list." << endl;
+				list->Display();
+				break;
+				//case 14:
+				//	cout << "Display all the SKUS in the list." << endl;
+				//	displayskus(list);
+				//	break;
+			case 14:
+				cout << "Terminating program." << endl;
+				break;
+			}
+			cout << "Clear text? (y/n)" << endl;
+			cin >> userresponse1;
+			if (userresponse1 == 'y')
+				system("CLS");
+		} while (userresponse != 14);
+
+
+
+
+
+	}
+
+
+
 
 
 
